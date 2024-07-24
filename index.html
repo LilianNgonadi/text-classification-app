@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Classification</title>
+</head>
+<body>
+    <h1>Text Classification</h1>
+    <textarea id="inputText" rows="4" cols="50"></textarea><br>
+    <button onclick="getPrediction()">Submit</button>
+    <p id="prediction"></p>
+
+    <script>
+        async function getPrediction() {
+            const text = document.getElementById('inputText').value;
+            const response = await fetch('https://your-backend-url.onrender.com/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: text })
+            });
+            const result = await response.json();
+            document.getElementById('prediction').innerText = `Prediction: ${result.prediction}`;
+        }
+    </script>
+</body>
+</html>
